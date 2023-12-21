@@ -3,6 +3,7 @@ export function parse(url: string, parseQueryString = false) {
   // we now swap the protocol to http: so that `new URL()` will parse it fully
   const httpUrl = 'http:' + url.substring(protocol.length);
   let { username, password, host, hostname, port, pathname, search, searchParams, hash } = new URL(httpUrl);
+  username = decodeURIComponent(username);
   password = decodeURIComponent(password);
   const auth = username + ':' + password;
   const query = parseQueryString ? Object.fromEntries(searchParams.entries()) : search;
